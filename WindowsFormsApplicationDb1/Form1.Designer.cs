@@ -35,6 +35,7 @@
             this.buttonReader = new System.Windows.Forms.Button();
             this.listBoxDaten = new System.Windows.Forms.ListBox();
             this.buttonUpdate = new System.Windows.Forms.Button();
+            this.buttonInsert = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,9 +53,9 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabelSatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 513);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 436);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1004, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(964, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -103,11 +104,22 @@
             this.buttonUpdate.UseVisualStyleBackColor = true;
             this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
+            // buttonInsert
+            // 
+            this.buttonInsert.Location = new System.Drawing.Point(210, 278);
+            this.buttonInsert.Name = "buttonInsert";
+            this.buttonInsert.Size = new System.Drawing.Size(260, 34);
+            this.buttonInsert.TabIndex = 6;
+            this.buttonInsert.Text = "Datensatz hinzufügen";
+            this.buttonInsert.UseVisualStyleBackColor = true;
+            this.buttonInsert.Click += new System.EventHandler(this.buttonInsert_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1004, 535);
+            this.ClientSize = new System.Drawing.Size(964, 458);
+            this.Controls.Add(this.buttonInsert);
             this.Controls.Add(this.buttonUpdate);
             this.Controls.Add(this.listBoxDaten);
             this.Controls.Add(this.buttonReader);
@@ -132,6 +144,7 @@
         private System.Windows.Forms.Button buttonReader;
         private System.Windows.Forms.ListBox listBoxDaten;
         private System.Windows.Forms.Button buttonUpdate;
+        private System.Windows.Forms.Button buttonInsert;
     }
 }
 

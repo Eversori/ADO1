@@ -82,6 +82,7 @@ namespace WindowsFormsApplicationDb1
             buttonReader.Enabled = false;
         }
 
+
         private Artikel mkArtikelObject(OleDbDataReader reader)
         {
             Artikel a = new Artikel();
@@ -124,6 +125,8 @@ namespace WindowsFormsApplicationDb1
                 if(frmUpdate.Result == DialogResult.OK)
                 {
                     updateArtikel(a);
+                    listBoxDaten.DataSource = null;
+                    listBoxDaten.DataSource = artikelList;
                 }
                 else
                 {
@@ -157,6 +160,19 @@ namespace WindowsFormsApplicationDb1
             {
 
                 MessageBox.Show("Fehler beim Update");
+            }
+        }
+
+        private void buttonInsert_Click(object sender, EventArgs e)
+        {
+            Artikel a = new Artikel();
+
+            FormInsert frmInsert = new FormInsert(con,a);
+
+            frmInsert.ShowDialog();
+            if(frmInsert.DialogResult == DialogResult.OK)
+            {
+
             }
         }
     }
