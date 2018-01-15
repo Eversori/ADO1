@@ -105,17 +105,24 @@ namespace WindowsFormsApplicationDb1
         private void buttonOk_Click(object sender, EventArgs e)
         {
             ArtGruppe artgrp = (ArtGruppe) this.comboBoxGrp.SelectedItem;
-            Verpackung vpck = (Verpackung)this.comboBoxVerpackung.SelectedItem;
+            Verpackung vpck = (Verpackung) this.comboBoxVerpackung.SelectedItem;
 
-            newArtikel.ArtikelOid = 0;
-            newArtikel.Bezeichnung = this.textBoxBez.Text;
-            newArtikel.ArtikelNr = this.textBoxNr.Text;
-            newArtikel.ArtikelGruppe = artgrp.GrpId;
-            newArtikel.Bestand = Convert.ToUInt16(this.textBoxBestand.Text);
-            newArtikel.Meldebestand = Convert.ToInt16(this.textBoxMeldeBest.Text);
-            newArtikel.Verpackung = vpck.VerpackungsId;
-            newArtikel.VkPreis = Convert.ToDecimal(this.textBoxPreis.Text);
-            newArtikel.LetzteEntnahme = this.dateTimePickerLetzteEnt.Value;
+            try
+            {
+                newArtikel.Bezeichnung = this.textBoxBez.Text;
+                newArtikel.ArtikelNr = this.textBoxNr.Text;
+                newArtikel.ArtikelGruppe = artgrp.GrpId;
+                newArtikel.Bestand = Convert.ToUInt16(this.textBoxBestand.Text);
+                newArtikel.Meldebestand = Convert.ToInt16(this.textBoxMeldeBest.Text);
+                newArtikel.Verpackung = vpck.VerpackungsId;
+                newArtikel.VkPreis = Convert.ToDecimal(this.textBoxPreis.Text);
+                newArtikel.LetzteEntnahme = this.dateTimePickerLetzteEnt.Value;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Fehler");
+                newArtikel = null;
+            }
 
             this.Result = DialogResult.OK;
             this.Close();

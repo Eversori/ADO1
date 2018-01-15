@@ -36,6 +36,9 @@
             this.listBoxDaten = new System.Windows.Forms.ListBox();
             this.buttonUpdate = new System.Windows.Forms.Button();
             this.buttonInsert = new System.Windows.Forms.Button();
+            this.labelBezirk = new System.Windows.Forms.Label();
+            this.textBoxBezirk = new System.Windows.Forms.TextBox();
+            this.buttonNeuBezirk = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -114,11 +117,40 @@
             this.buttonInsert.UseVisualStyleBackColor = true;
             this.buttonInsert.Click += new System.EventHandler(this.buttonInsert_Click);
             // 
+            // labelBezirk
+            // 
+            this.labelBezirk.AutoSize = true;
+            this.labelBezirk.Location = new System.Drawing.Point(222, 361);
+            this.labelBezirk.Name = "labelBezirk";
+            this.labelBezirk.Size = new System.Drawing.Size(36, 13);
+            this.labelBezirk.TabIndex = 7;
+            this.labelBezirk.Text = "Bezirk";
+            // 
+            // textBoxBezirk
+            // 
+            this.textBoxBezirk.Location = new System.Drawing.Point(264, 358);
+            this.textBoxBezirk.Name = "textBoxBezirk";
+            this.textBoxBezirk.Size = new System.Drawing.Size(181, 20);
+            this.textBoxBezirk.TabIndex = 8;
+            // 
+            // buttonNeuBezirk
+            // 
+            this.buttonNeuBezirk.Location = new System.Drawing.Point(463, 356);
+            this.buttonNeuBezirk.Name = "buttonNeuBezirk";
+            this.buttonNeuBezirk.Size = new System.Drawing.Size(75, 23);
+            this.buttonNeuBezirk.TabIndex = 9;
+            this.buttonNeuBezirk.Text = "Neu";
+            this.buttonNeuBezirk.UseVisualStyleBackColor = true;
+            this.buttonNeuBezirk.Click += new System.EventHandler(this.buttonNeuBezirk_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(964, 458);
+            this.Controls.Add(this.buttonNeuBezirk);
+            this.Controls.Add(this.textBoxBezirk);
+            this.Controls.Add(this.labelBezirk);
             this.Controls.Add(this.buttonInsert);
             this.Controls.Add(this.buttonUpdate);
             this.Controls.Add(this.listBoxDaten);
@@ -145,6 +177,9 @@
         private System.Windows.Forms.ListBox listBoxDaten;
         private System.Windows.Forms.Button buttonUpdate;
         private System.Windows.Forms.Button buttonInsert;
+        private System.Windows.Forms.Label labelBezirk;
+        private System.Windows.Forms.TextBox textBoxBezirk;
+        private System.Windows.Forms.Button buttonNeuBezirk;
     }
 }
 

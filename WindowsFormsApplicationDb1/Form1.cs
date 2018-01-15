@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb;
+using System.Globalization;
 
 namespace WindowsFormsApplicationDb1
 {
@@ -68,6 +69,7 @@ namespace WindowsFormsApplicationDb1
 
         private void buttonReader_Click(object sender, EventArgs e)
         {
+
             while(reader.Read())
             {
                 //String bez = reader.GetString(3);
@@ -103,7 +105,9 @@ namespace WindowsFormsApplicationDb1
 
             a.Verpackung = Convert.ToInt32(checkDBNull(reader[i++]));
 
-            a.VkPreis = Convert.ToDecimal(checkDBNull(reader[i]));
+            a.VkPreis = Convert.ToDecimal(checkDBNull(reader[i++]));
+
+            //a.LetzteEntnahme = Convert.ToDateTime(checkDBNull(reader[i]));
 
             return a;
         }
@@ -120,6 +124,7 @@ namespace WindowsFormsApplicationDb1
             if (listBoxDaten.SelectedItem != null)
             {
                 Artikel a = (Artikel) listBoxDaten.SelectedItem;
+                a.onUpdateError = MeldeBestand;
                 FormUpdate frmUpdate = new FormUpdate(a);
                 frmUpdate.ShowDialog(); // Modales Fenster
                 if(frmUpdate.Result == DialogResult.OK)
@@ -170,10 +175,61 @@ namespace WindowsFormsApplicationDb1
             FormInsert frmInsert = new FormInsert(con,a);
 
             frmInsert.ShowDialog();
-            if(frmInsert.DialogResult == DialogResult.OK)
+            if ( a != null)
             {
-
+                insertNewArtikel(a);
+                listBoxDaten.DataSource = null;
+                listBoxDaten.DataSource = artikelList;
             }
+            else
+            {
+                MessageBox.Show("Abgebrochen");
+            }
+        }
+
+        private void insertNewArtikel(Artikel a)
+        {
+            OleDbCommand cmd = con.CreateCommand();
+
+            cmd.Parameters.AddWithValue("ANR", a.ArtikelNr);
+            cmd.Parameters.AddWithValue("GRP", a.ArtikelGruppe);
+            cmd.Parameters.AddWithValue("BEZ", a.Bezeichnung);
+            cmd.Parameters.AddWithValue("BEST", a.Bestand);
+            cmd.Parameters.AddWithValue("MBEST", a.Meldebestand);
+            cmd.Parameters.AddWithValue("VPCK", a.Verpackung);
+            cmd.Parameters.AddWithValue("PREIS", a.VkPreis.ToString(new CultureInfo("de-DE")));
+            cmd.Parameters.AddWithValue("LEZTENT", a.LetzteEntnahme);
+
+            String cmdString = "insert into tArtikel (ArtikelNr, ArtikelGruppe, Bezeichnung, ";
+            cmdString += "Bestand, Meldebestand, Verpackung, VkPreis, letzteEntnahme) ";
+            cmdString += "values (ANR,GRP,BEZ,BEST,MBEST,VPCK,PREIS,LEZTENT);";
+
+            cmd.CommandText = cmdString;
+
+        
+                cmd.ExecuteNonQuery();
+                toolStripStatusLabelSatus.Text = "Neuer Artikel hinzugefügt";
+            
+
+
+        }
+
+        private void buttonNeuBezirk_Click(object sender, EventArgs e)
+        {
+            OleDbCommand cmd = con.CreateCommand();
+            cmd.CommandText = "Insert into tBezirk (Bezirk) values ('" + textBoxBezirk.Text + "')";
+            cmd.CommandType = CommandType.Text;
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "Select @@IDENTITY From tBezirk";
+            Int32 id = Convert.ToInt32(cmd.ExecuteScalar());
+            MessageBox.Show("Satz mit Id " + id.ToString() + " eingefügt");
+        }
+
+
+        private void MeldeBestand(String message)
+        {
+            MessageBox.Show(message);
         }
     }
 }

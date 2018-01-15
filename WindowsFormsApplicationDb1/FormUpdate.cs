@@ -14,6 +14,8 @@ namespace WindowsFormsApplicationDb1
     {
         Artikel selArtikel;
         DialogResult result = DialogResult.OK;
+        
+        
 
         public DialogResult Result
         {
@@ -50,6 +52,7 @@ namespace WindowsFormsApplicationDb1
         {
             SelArtikel = artikel;
             InitializeControls();
+           // artikel.onUpdateError = Meldebestand;
         }
 
         private void InitializeControls()
@@ -82,6 +85,11 @@ namespace WindowsFormsApplicationDb1
 
 
             this.Close();
+        }
+
+        private void Meldebestand(String message)
+        {
+            MessageBox.Show(message);
         }
     }
 }
